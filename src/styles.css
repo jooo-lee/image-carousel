@@ -13,12 +13,21 @@
 html,
 body {
     height: 100%;
+}
+
+body {
     display: grid;
     justify-content: center;
     align-items: center;
 }
 
 .image-carousel {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.slider {
     position: relative; /* So we can absolutely position children elements */
     height: calc(var(--image-height) + 40px);
     width: calc(var(--image-width) + var(--arrow-button-width) * 2);
@@ -30,7 +39,7 @@ body {
 
 /* ---------------- Arrow buttons inside image carousel ---------------- */
 
-.arrow-button {
+.arrow-btn {
     position: absolute;
     height: var(--image-height);
     width: var(--arrow-button-width);
@@ -80,4 +89,26 @@ body {
 .image-container img {
     height: var(--image-height);
     width: var(--image-width);
+}
+
+/* ---------------- Navigation dots ---------------- */
+
+.nav-dots-container {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+}
+
+.nav-dot {
+    border: 2px solid black;
+    cursor: pointer;
+    height: 12px;
+    width: 12px;
+    background-color: white;
+    border-radius: 50%;
+    display: inline-block;
+}
+
+.active-nav-dot {
+    background-color: black;
 }
