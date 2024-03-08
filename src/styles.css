@@ -1,0 +1,83 @@
+:root {
+    --image-height: 200px;
+    --image-width: 200px;
+    --arrow-button-width: 30px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html,
+body {
+    height: 100%;
+    display: grid;
+    justify-content: center;
+    align-items: center;
+}
+
+.image-carousel {
+    position: relative; /* So we can absolutely position children elements */
+    height: calc(var(--image-height) + 40px);
+    width: calc(var(--image-width) + var(--arrow-button-width) * 2);
+    overflow: hidden;
+    border: 2px solid black;
+    display: flex;
+    align-items: center;
+}
+
+/* ---------------- Arrow buttons inside image carousel ---------------- */
+
+.arrow-button {
+    position: absolute;
+    height: var(--image-height);
+    width: var(--arrow-button-width);
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+
+    /* Vertically center arrow buttons */
+    top: 0;
+    bottom: 0;
+    margin: auto 0;
+}
+
+.next {
+    right: 0;
+}
+
+.arrow {
+    border: solid black;
+    border-width: 0 3px 3px 0;
+    display: inline-block;
+    padding: 4px;
+}
+
+.left {
+    transform: rotate(135deg);
+    -webkit-transform: rotate(135deg);
+}
+
+.right {
+    transform: rotate(-45deg);
+    -webkit-transform: rotate(-45deg);
+}
+
+/* ---------------- Div containing images ---------------- */
+
+.image-container {
+    display: flex;
+    margin-left: var(--arrow-button-width);
+    margin-right: var(--arrow-button-width);
+    gap: var(--arrow-button-width);
+    position: relative;
+    right: 0px;
+    transition: right 500ms ease-in-out;
+}
+
+.image-container img {
+    height: var(--image-height);
+    width: var(--image-width);
+}
