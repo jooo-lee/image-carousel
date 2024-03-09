@@ -1,3 +1,4 @@
+import beginSlideTimer from './beginSlideTimer';
 import goToSlide from './goToSlide';
 
 /**
@@ -32,6 +33,8 @@ const createNavDots = function createNavigationDots(
             const newImageIndex = parseInt(this.dataset.index);
             goToSlide(newImageIndex);
             currentImage.index = newImageIndex;
+
+            beginSlideTimer(currentImage, numberOfImages);
         });
 
         navDotsContainer.appendChild(navDot);

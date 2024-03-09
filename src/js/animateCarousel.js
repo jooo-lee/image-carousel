@@ -1,6 +1,7 @@
 import createNavDots from './createNavDots';
 import addPrevBtnFunc from './addPrevBtnFunc';
 import addNextBtnFunc from './addNextBtnFunc';
+import beginSlideTimer from './beginSlideTimer';
 
 const animateCarousel = function animateCarousel(imageContainer) {
     /**
@@ -12,9 +13,10 @@ const animateCarousel = function animateCarousel(imageContainer) {
      */
     let currentImage = { index: 1 };
     const numberOfImages = imageContainer.childElementCount;
-    addPrevBtnFunc(currentImage);
+    addPrevBtnFunc(currentImage, numberOfImages);
     addNextBtnFunc(currentImage, numberOfImages);
     createNavDots(currentImage, numberOfImages);
+    beginSlideTimer(currentImage, numberOfImages);
 };
 
 export default animateCarousel;
