@@ -1,21 +1,21 @@
+import goToSlide from './goToSlide';
+
 // We will use index starting at 1 for image and navigation dot indexing
 let currentImageIndex = 1;
 
-const createNavDots = function createNavigationDots(
-    imageContainer,
-    distToShiftBy,
-    numberOfImages
-) {
+const createNavDots = function createNavigationDots(numberOfImages) {
     const navDotsContainer = document.querySelector('#nav-dots-container');
-    for (let i = 0; i < numberOfImages; i++) {
+
+    for (let i = 1; i < numberOfImages + 1; i++) {
         const navDot = document.createElement('button');
         navDot.classList.add('nav-dot');
 
         // Image carousel starts at first image
-        if (i === 0) {
+        if (i === 1) {
             navDot.classList.add('active-nav-dot');
         }
-        navDot.dataset.index = i + 1;
+
+        navDot.dataset.index = i;
         navDot.addEventListener('click', function () {
             // Track current navigation dot
             document
@@ -24,10 +24,11 @@ const createNavDots = function createNavigationDots(
             this.classList.add('active-nav-dot');
 
             // Slide to correct image
-            imageContainer.style.right =
-                (this.dataset.index - 1) * distToShiftBy + 'px';
-            currentImageIndex = parseInt(this.dataset.index);
+            const newImageIndex = parseInt(this.dataset.index);
+            goToSlide(newImageIndex);
+            currentImageIndex = newImageIndex;
         });
+
         navDotsContainer.appendChild(navDot);
     }
 };
@@ -40,26 +41,21 @@ const setActiveNavDot = function setActiveNavDot(index) {
     newActiveNavDot.classList.add('active-nav-dot');
 };
 
-const addPreviousBtnFunctionality = function addPreviousBtnFunctionality(
-    imageContainer,
-    distToShiftBy
-) {
+const addPreviousBtnFunctionality = function addPreviousBtnFunctionality() {
     const previousBtn = document.querySelector('#previous-btn');
     previousBtn.addEventListener('click', () => {
         // Stop at first image in carousel
         if (currentImageIndex === 1) return;
 
         // Display previous image in imageContainer
-        imageContainer.style.right =
-            (currentImageIndex - 2) * distToShiftBy + 'px';
-        currentImageIndex -= 1;
-        setActiveNavDot(currentImageIndex);
+        const newImageIndex = currentImageIndex - 1;
+        goToSlide(newImageIndex);
+        setActiveNavDot(newImageIndex);
+        currentImageIndex = newImageIndex;
     });
 };
 
 const addNextBtnFunctionality = function addNextBtnFunctionality(
-    imageContainer,
-    distToShiftBy,
     numberOfImages
 ) {
     const nextBtn = document.querySelector('#next-btn');
@@ -68,21 +64,19 @@ const addNextBtnFunctionality = function addNextBtnFunctionality(
         if (currentImageIndex === numberOfImages) return;
 
         // Display next image in imageContainer
-        imageContainer.style.right = currentImageIndex * distToShiftBy + 'px';
-        currentImageIndex += 1;
-        setActiveNavDot(currentImageIndex);
+        const newImageIndex = currentImageIndex + 1;
+        goToSlide(newImageIndex);
+        setActiveNavDot(newImageIndex);
+        currentImageIndex = newImageIndex;
     });
 };
 
 const animateCarousel = function animateCarousel(imageContainer) {
     const numberOfImages = imageContainer.childElementCount;
-    const distToShiftBy =
-        imageContainer.children[1].getBoundingClientRect().x -
-        imageContainer.children[0].getBoundingClientRect().x;
 
-    addPreviousBtnFunctionality(imageContainer, distToShiftBy);
-    addNextBtnFunctionality(imageContainer, distToShiftBy, numberOfImages);
-    createNavDots(imageContainer, distToShiftBy, numberOfImages);
+    addPreviousBtnFunctionality();
+    addNextBtnFunctionality(numberOfImages);
+    createNavDots(numberOfImages);
 };
 
 export default animateCarousel;
