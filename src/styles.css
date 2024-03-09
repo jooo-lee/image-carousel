@@ -4,6 +4,7 @@
     --arrow-button-width: 30px;
     --slider-height: calc(var(--image-height) + 40px);
     --slider-width: calc(var(--image-width) + var(--arrow-button-width) * 2);
+    --slider-border-radius: 20px;
 }
 
 * {
@@ -35,7 +36,7 @@ body {
     width: var(--slider-width);
     overflow: hidden;
     border: 2px solid black;
-    border-radius: 20px;
+    border-radius: var(--slider-border-radius);
     display: flex;
     align-items: center;
 }
@@ -56,7 +57,12 @@ body {
     margin: auto 0;
 }
 
+.previous {
+    border-radius: var(--slider-border-radius) 0 0 var(--slider-border-radius);
+}
+
 .next {
+    border-radius: 0 var(--slider-border-radius) var(--slider-border-radius) 0;
     right: 0;
 }
 
