@@ -1,3 +1,4 @@
+// Shifts image carousel according to index to go to desired slide
 const goToSlide = function goToSlide(slideIndex) {
     const imageContainer = document.querySelector('#pokémon-image-container');
     if (imageContainer.childElementCount < 2) return;

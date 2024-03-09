@@ -1,5 +1,10 @@
 import goToSlide from './goToSlide';
 
+/**
+ * Creates navigation dots that indicate to users which slide in the image
+ * carousel they are currently viewing. The dots can also be clicked to go
+ * to a specific slide.
+ */
 const createNavDots = function createNavigationDots(
     currentImage,
     numberOfImages
