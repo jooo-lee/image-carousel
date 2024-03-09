@@ -1,6 +1,7 @@
 import goToSlide from './goToSlide';
 import setActiveNavDot from './setActiveNavDot';
 import createNavDots from './createNavDots';
+import addPrevBtnFunc from './addPrevBtnFunc';
 
 /**
  * We will use index starting at 1 for image and navigation dot indexing.
@@ -10,20 +11,6 @@ import createNavDots from './createNavDots';
  * JavaScript is a pass-by-value language.
  */
 let currentImage = { index: 1 };
-
-const addPreviousBtnFunctionality = function addPreviousBtnFunctionality() {
-    const previousBtn = document.querySelector('#previous-btn');
-    previousBtn.addEventListener('click', () => {
-        // Stop at first image in carousel
-        if (currentImage.index === 1) return;
-
-        // Display previous image in imageContainer
-        const newImageIndex = currentImage.index - 1;
-        goToSlide(newImageIndex);
-        setActiveNavDot(newImageIndex);
-        currentImage.index = newImageIndex;
-    });
-};
 
 const addNextBtnFunctionality = function addNextBtnFunctionality(
     numberOfImages
@@ -43,7 +30,7 @@ const addNextBtnFunctionality = function addNextBtnFunctionality(
 
 const animateCarousel = function animateCarousel(imageContainer) {
     const numberOfImages = imageContainer.childElementCount;
-    addPreviousBtnFunctionality();
+    addPrevBtnFunc(currentImage);
     addNextBtnFunctionality(numberOfImages);
     createNavDots(currentImage, numberOfImages);
 };
